@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+
+<head>
+
+    <!-- Tab Title -->
+    <title>Pixel Artist</title>
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/main_styles.css">
+    <link rel="stylesheet" href="css/editor_styles.css">
+
+    <!-- JS Pre-Load Scripts -->
+
+</head>
+
+
+<body>
+    
+    <!-- Editor's User Interface -->
+    <div class='big_content_block' id='main_editor_div'>
+
+        <!-- User Toolbar -->
+        <div class='small_content_block' id='tools_div'>
+
+            <!-- Brush size choice block -->
+            <label class="tool_block_label">Brush size</label>
+            <div class="tool_block">
+                <div id="slider_div">
+                   <input name="brush_size" id="brush_size_slider" class="slider" type="range" 
+                    min=1 max=50 value=1 onchange="update_brush_size()">
+                </div>
+                <div id="choosen_brush_size_indicator">1px</div>
+            </div>
+
+            <hr class="tool_separator">
+            
+            <!--Color choice block -->
+            <label class="tool_block_label">Color</label>
+            <div class="tool_block">
+                <div id="color_div">
+                    <input id="col_radio_0" class="radiobutton" type="submit" value="" onclick="load_color_at(0)">
+                    <input id="col_radio_1" class="radiobutton" type="submit" value="" onclick="load_color_at(1)">
+                    <input id="col_radio_2" class="radiobutton" type="submit" value="" onclick="load_color_at(2)">
+                    <input id="col_radio_3" class="radiobutton" type="submit" value="" onclick="load_color_at(3)">
+                    <input id="col_radio_4" class="radiobutton" type="submit" value="" onclick="load_color_at(4)">
+                    <input id="col_radio_5" class="radiobutton" type="submit" value="" onclick="load_color_at(5)">
+                    <input id="col_radio_6" class="radiobutton" type="submit" value="" onclick="load_color_at(6)">
+                    <input id="col_radio_7" class="radiobutton" type="submit" value="" onclick="load_color_at(7)">
+                    <input id="col_radio_8" class="radiobutton" type="submit" value="" onclick="load_color_at(8)">
+                    <input id="col_radio_9" class="radiobutton" type="submit" value="" onclick="load_color_at(9)">
+                    <input id="col_radio_10" class="radiobutton" type="submit" value="" onclick="load_color_at(10)">
+                    <input id="col_radio_11" class="radiobutton" type="submit" value="" onclick="load_color_at(11)">
+                    <input id="col_radio_12" class="radiobutton" type="submit" value="" onclick="load_color_at(12)">
+                    <input id="col_radio_13" class="radiobutton" type="submit" value="" onclick="load_color_at(13)">
+                </div>
+                <input id="save_color_button" class="button" type="submit" value="Save" onclick="save_color()">
+            </div>
+            <div class="tool_block">
+                <div id="slider_div">
+                    <input id="red_slider" class="slider" type="range" min=0 max=255 value=255 onchange="update_color()">
+                    <input id="green_slider" class="slider" type="range" min=0 max=255 value=255 onchange="update_color()">
+                    <input id="blue_slider" class="slider" type="range" min=0 max=255 value=255 onchange="update_color()">
+                </div>
+                <div id="choosen_color_indicator"></div>
+            </div>
+
+            <hr class="tool_separator">
+            
+            <!-- Other tools block -->
+            <label class="tool_block_label">Other</label>
+            <div class="tool_block">
+                <input id="grid_wanted_button" class="button" type="submit" value="Toggle Grid" onclick="update_grid_wanted()">
+                <input id="undo_button" class="button" type="submit" value="Undo" onclick="load_previous_canvas_state()">
+            </div>
+
+            <hr class="tool_separator">
+
+            <!-- New project block -->
+            <label class="tool_block_label">New project</label>
+            <div class="tool_block">
+                <select class="combobox" id='new_project_size_choice'>
+                    <option value=16>16x16</option>
+                    <option value=32>32x32</option>
+                    <option value=64>64x64</option>
+                    <option value=128>128x128</option>
+                </select>
+                <input id="grid_wanted_button" class="button" type="submit" value="Open" onclick="new_project()">
+            </div>
+
+            <hr class="tool_separator">
+
+        </div>
+
+        <!-- Canvas -->
+        <div class='small_content_block' id='canvas_div'>
+            <canvas id='main_canvas' width="780" height="780"></canvas>
+        </div>
+
+    </div>
+
+    <!-- JS Post-Load Scripts -->
+    <script type="text/javascript" src="scripts/mouse_checker.js"></script>
+    <script type="text/javascript" src="scripts/new_project_initializer.js"></script>
+    <script type="text/javascript" src="scripts/canvas_logic.js"></script>
+    <script type="text/javascript" src="scripts/drawing_logic.js"></script>
+    <script type="text/javascript" src="scripts/undo_logic.js"></script>
+    <script type="text/javascript" src="scripts/indicators_updating.js"></script>
+    <script type="text/javascript" src="scripts/saved_colors_manager.js"></script>
+
+</body>

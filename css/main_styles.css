@@ -1,0 +1,132 @@
+/* Default Reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* body and major element classes */
+body{
+    max-width: max-content;
+    margin: auto;
+    background-color: #111133;
+}
+
+.big_content_block{
+    padding: 10px;
+    background-color: #000033;
+}
+
+.small_content_block{
+    background-color: #000055;
+}
+
+/* sliders */
+.slider {
+
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+
+    width: 280px; 
+    height: 25px; 
+
+    background: #222277; 
+    outline: none; 
+    opacity: 0.7; 
+
+    -webkit-transition: .4s;
+    transition: opacity .4s;
+}
+
+/* slider mouse-over */
+.slider:hover {
+    opacity: 1; 
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+
+    -webkit-appearance: none; 
+    appearance: none;
+
+    width: 25px; 
+    height: 25px; 
+
+    background: #444499; 
+    cursor: pointer; /* Cursor on hover */
+
+    transition: .4s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+.slider::-moz-range-thumb {
+
+    width: 25px; 
+    height: 25px; 
+
+    background: #444499; 
+    cursor: pointer; /* Cursor on hover */
+
+    transition: .4s;
+}
+
+.slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+}
+
+/* checkboxes */
+.checkbox{
+    width: 25px;
+    height: 25px;
+}
+
+/* buttons */
+.button {
+    height: 25px;
+    font-size: 18px;
+
+    margin: 5px;
+    padding: 3px;
+    border: none;
+
+    background: #444499;
+    opacity: 0.7;
+    transition: .4s;
+}
+
+.button:focus{
+    outline: none;
+}
+
+.button:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+
+/* comboboxes */
+.combobox {
+    height: 25px;
+    font-size: 18px;
+
+    margin: 5px;
+    padding: 3px;
+    border: none;
+
+    background: #444499;
+    opacity: 0.7;
+    transition: .4s;
+}
+
+.combobox:focus{
+    outline: none;
+}
+
+.combobox:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+

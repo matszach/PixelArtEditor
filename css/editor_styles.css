@@ -1,0 +1,136 @@
+#main_editor_div{
+    width: 1200px;
+    height: 800px;
+}
+
+#tools_div{
+    width: 400px;
+    height: 800px;
+    float: left;
+    margin: auto;
+    text-align: center;
+}
+
+
+#canvas_div{
+    width: 800px;
+    height: 800px;
+    float: right;
+}
+
+#main_canvas{
+    margin: 10px;
+    background-color: #ffffff;
+}
+
+#choosen_brush_size_indicator{
+    font-size: 20px;
+    color: #ffffff;
+    margin: auto;
+}
+
+/* choosen color indicator */
+#choosen_color_indicator{
+    width: 75px;
+    height: 75px;
+
+    background-color: #ffffff;
+
+    margin: auto;
+
+    border-radius: 50%; 
+    border-style: solid;
+    border-width: 4px;
+    border-color: #4444ff;
+}
+
+#slider_div{
+    width: 300px;
+    margin: none;
+}
+
+#color_div{
+    width: 300px;
+    margin: none;
+}
+
+
+/* rgb sliders */
+#red_slider{
+    background-color: #994444;
+}
+
+#red_slider::-webkit-slider-thumb{
+    background-color: #ff4444;
+}
+
+#red_slider::-moz-range-thumb{
+    background-color: #ff4444;
+}
+
+#green_slider{
+    background-color: #449944;
+}
+
+#green_slider::-webkit-slider-thumb{
+    background-color: #44ff44;
+}
+
+#green_slider::-moz-range-thumb{
+    background-color: #44ff44;
+}
+
+#blue_slider{
+    background-color: #444499;
+}
+
+#blue_slider::-webkit-slider-thumb{
+    background-color: #4444ff;
+}
+
+#blue_slider::-moz-range-thumb{
+    background-color: #4444ff;
+}
+
+/* color radio buttons */
+.radiobutton{
+    height: 37px;
+    width: 37px;
+    border-color: #4444ff;
+    border-width: 3px;
+    background: #ffffff;
+    margin: none;
+}
+
+.radiobutton:focus{
+    outline: none;
+}
+
+/* separators */
+.tool_separator{
+    width: 90%;
+    margin: 10px;
+
+    border-radius: 50%; 
+    border-style: solid;
+    border-width: 2px;
+    border-color: #4444ff;
+}
+
+/* tool blocks */
+.tool_block{
+    margin: 10px;
+    display: flex;
+}
+
+/* tool block label */
+.tool_block_label{
+    font-size: 20px;
+    color: #ffffff;
+    margin: auto;
+}
+
+/* selected outliers */
+#save_color_button{
+    margin: auto;
+}
