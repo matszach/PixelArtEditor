@@ -22,8 +22,8 @@ const blue_slider = document.getElementById("blue_slider");
 
 
 // ========== constants ========== 
-const default_color_button_border_color = "#4444ff";
-const selected_color_button_border_color = "#994444";
+const default_color_button_border_color = toRGB(80,80,255);
+const selected_color_button_border_color = toRGB(150,80,80);
 
 
 // ========== variables ========== 
@@ -55,7 +55,7 @@ var current_color_save_index = 7;
 // paints color buttons with default selected colors
 for(i = 0; i < color_buttons.length; i++){
     default_color = saved_colors[i];
-    color_buttons[i].style.backgroundColor = "rgb("+default_color[0]+","+default_color[1]+","+default_color[2]+")";
+    color_buttons[i].style.backgroundColor = toRGB(default_color[0],default_color[1],default_color[2]);
 }
 color_buttons[current_color_save_index].style.borderColor = selected_color_button_border_color;
 
@@ -77,7 +77,7 @@ function save_color(){
 
 function save_color_at(index){
     saved_colors[index] = choosen_color;
-    color_buttons[index].style.backgroundColor = "rgb("+choosen_color[0]+","+choosen_color[1]+","+choosen_color[2]+")";
+    color_buttons[index].style.backgroundColor = toRGB(choosen_color[0],choosen_color[1],choosen_color[2]);
 }
 
 // loading

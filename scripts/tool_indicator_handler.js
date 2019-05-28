@@ -15,7 +15,7 @@ function update_color_choosen_indicator(){
     r = red_slider.value;
     g = green_slider.value;
     b = blue_slider.value;
-    choosen_color_indicator.style.backgroundColor = "rgb("+r+","+g+","+b+")";    
+    choosen_color_indicator.style.backgroundColor = toRGB(r,g,b);  
 }
 
 

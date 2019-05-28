@@ -5,10 +5,10 @@ const ctx = cvs.getContext("2d");
 
 // ========== constants ========== 
 const canvas_size = 780;
-const grid_color = "rgb(120,120,120)";
+const grid_color = toRGB(120,120,120);
 const grid_width = 2;
-const highlighted_grid_color_mouse_up = "rgb(120,120,255)";
-const highlighted_grid_color_mouse_down = "rgb(255,120,120)";
+const highlighted_grid_color_mouse_up = toRGB(120,120,255);
+const highlighted_grid_color_mouse_down = toRGB(255,120,120)
 const highlighted_grid_width = 5;
 
 
@@ -57,7 +57,7 @@ function redraw_state(){
     for(i = 0; i < size_in_units; i++){
         for(j = 0; j < size_in_units; j++){
             color = canvas_status_table[i][j];
-            ctx.fillStyle = "rgb("+color[0]+","+color[1]+","+color[2]+")";
+            ctx.fillStyle = toRGB(color[0],color[1],color[2]);
             ctx.fillRect(i*unit_size,j*unit_size,unit_size,unit_size);
         }
     }
