@@ -21,13 +21,13 @@ const selected_color_button_border_color = "#994444";
 
 // variables
 var saved_colors = [
-    [255,255,255],
-    [255,255,255],
-    [255,255,255],
-    [255,255,255],
-    [255,255,255],
-    [255,255,255],
-    [255,255,255],
+    [0,0,0],
+    [255,0,0],
+    [0,255,0],
+    [0,0,255],
+    [255,255,0],
+    [255,0,255],
+    [0,255,255],
     [255,255,255],
     [255,255,255],
     [255,255,255],
@@ -38,8 +38,12 @@ var saved_colors = [
 ];
 
 // sets button 0 as selected by default
-var current_color_save_index = 0;
-color_buttons[0].style.borderColor = selected_color_button_border_color;
+var current_color_save_index = 7;
+for(i = 0; i < color_buttons.length; i++){
+    default_color = saved_colors[i];
+    color_buttons[i].style.backgroundColor = "rgb("+default_color[0]+","+default_color[1]+","+default_color[2]+")";
+}
+color_buttons[current_color_save_index].style.borderColor = selected_color_button_border_color;
 
 // saving
 function save_color(){
