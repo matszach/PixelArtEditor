@@ -54,6 +54,11 @@
     margin: none;
 }
 
+#brush_type_div{
+    width: 400px;
+    margin: none;
+}
+
 
 /* rgb sliders */
 #red_slider{
@@ -90,6 +95,20 @@
 
 #blue_slider::-moz-range-thumb{
     background-color: #4444ff;
+}
+
+/* brush type image buttons */
+.imagebutton{
+    height: 33px;
+    width: 33px;
+    border-style: solid; 
+    border-color:#4444ff; 
+    border-width: 2px; 
+    margin: none;
+}
+
+.imagebutton:focus{
+    outline: none;
 }
 
 /* color radio buttons */
