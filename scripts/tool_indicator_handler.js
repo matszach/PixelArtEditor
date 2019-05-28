@@ -1,8 +1,9 @@
-// elements
+// ========== html elements ========== 
 choosen_color_indicator = document.getElementById("choosen_color_indicator");
 choosen_brush_size_indicator = document.getElementById("choosen_brush_size_indicator");
 
 
+// ========== runtime ========== 
 
 // update choosen brush size indicator
 function update_brush_size_indicator(){
@@ -25,6 +26,6 @@ function update_indicators(){
 }
 
 
-// init
+// ========== init ========== 
 indicator_interval = setInterval(update_indicators, 100);
 

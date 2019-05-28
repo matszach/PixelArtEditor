@@ -1,4 +1,4 @@
-// elements
+// ========== html elements ========== 
 const color_buttons = [
     document.getElementById("col_radio_0"),
     document.getElementById("col_radio_1"),
@@ -16,10 +16,19 @@ const color_buttons = [
     document.getElementById("col_radio_13")
 ];
 
+const red_slider = document.getElementById("red_slider");
+const green_slider = document.getElementById("green_slider");
+const blue_slider = document.getElementById("blue_slider");
+
+
+// ========== constants ========== 
 const default_color_button_border_color = "#4444ff";
 const selected_color_button_border_color = "#994444";
 
-// variables
+
+// ========== variables ========== 
+var choosen_color = [255,255,255];
+
 var saved_colors = [
     [0,0,0],
     [255,0,0],
@@ -37,13 +46,29 @@ var saved_colors = [
     [255,255,255]
 ];
 
-// sets button 0 as selected by default
+
+// ========== init ========== 
+
+// sets button  7 as selected by default
 var current_color_save_index = 7;
+
+// paints color buttons with default selected colors
 for(i = 0; i < color_buttons.length; i++){
     default_color = saved_colors[i];
     color_buttons[i].style.backgroundColor = "rgb("+default_color[0]+","+default_color[1]+","+default_color[2]+")";
 }
 color_buttons[current_color_save_index].style.borderColor = selected_color_button_border_color;
+
+
+// ========== runtime ========== 
+
+// updating current choosen color
+function update_color(){
+    r = red_slider.value;
+    g = green_slider.value;
+    b = blue_slider.value;
+    choosen_color = [r,g,b];
+}
 
 // saving
 function save_color(){

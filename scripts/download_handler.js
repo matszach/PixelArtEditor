@@ -1,8 +1,8 @@
-
-// size of a "square" on an actual .png file
+// ========== variables ========== 
 var pixel_size_on_image = 16;
 
-// 
+
+// ========== runtime ========== 
 function create_and_prompt_download(){
 
     temp_canvas = document.createElement('canvas');

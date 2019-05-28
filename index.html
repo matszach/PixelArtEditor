@@ -91,7 +91,10 @@
             <hr class="tool_separator">
 
             <!-- Download block -->
-            <input id="download_button" class="button" type="submit" value="Download" onclick="create_and_prompt_download()">
+            <label class="tool_block_label">Download</label>
+            <div class="tool_block">
+                <input id="download_button" class="button" type="submit" value="Download" onclick="create_and_prompt_download()">
+            </div>
 
         </div>
 
@@ -103,15 +106,18 @@
     </div>
 
     <!-- JS Post-Load Scripts -->
-    <script type="text/javascript" src="scripts/mouse_checker.js"></script>
+    <script type="text/javascript" src="scripts/mouse_location_handler.js"></script>
+
     <script type="text/javascript" src="scripts/new_project_initializer.js"></script>
-    <script type="text/javascript" src="scripts/canvas_logic.js"></script>
-    <script type="text/javascript" src="scripts/drawing_logic.js"></script>
-    <script type="text/javascript" src="scripts/undo_logic.js"></script>
-    <script type="text/javascript" src="scripts/indicators_updating.js"></script>
-    <script type="text/javascript" src="scripts/saved_colors_manager.js"></script>
-    <script type="text/javascript" src="scripts/file_downloading.js"></script>
+   
+    <script type="text/javascript" src="scripts/color_controller.js"></script>
+    <script type="text/javascript" src="scripts/brush_controller.js"></script>
+    <script type="text/javascript" src="scripts/canvas_controller.js"></script>
 
-
+    <script type="text/javascript" src="scripts/draw_handler.js"></script>
+    <script type="text/javascript" src="scripts/undo_handler.js"></script>
+    <script type="text/javascript" src="scripts/tool_indicator_handler.js"></script>
+    
+    <script type="text/javascript" src="scripts/download_handler.js"></script>
 
 </body>

@@ -1,10 +1,9 @@
-// === CONSTANTS ===
-
-// canvas
+// ========== html elements ========== 
 const cvs = document.getElementById("main_canvas");
 const ctx = cvs.getContext("2d");
 
-// other
+
+// ========== constants ========== 
 const canvas_size = 780;
 const grid_color = "rgb(120,120,120)";
 const grid_width = 2;
@@ -13,27 +12,22 @@ const highlighted_grid_color_mouse_down = "rgb(255,120,120)";
 const highlighted_grid_width = 5;
 
 
-// === VARIABLES ===
+// ========== variables ========== 
 let size_in_units;
 let unit_size;
 
+var grid_wanted = true;
 
 // canvas status
 let canvas_status_table;
 
-function init_project_table(){
-    canvas_status_table = [];
-    for(i = 0; i < size_in_units; i++){
-        row = [];
-        for(j = 0; j < size_in_units; j++){
-            row.push([0,0,0]);
-        }
-        canvas_status_table.push(row);
-    }
+
+// ========== runtime ========== 
+
+// toggle grid-wanted
+function update_grid_wanted(){
+    grid_wanted = !grid_wanted;
 }
-
-
-
 
 // draws unit-grid ("pixel"-grid)
 function show_grid(){
@@ -79,7 +73,7 @@ function update_canvas(){
 }
 
 
-// init
+// ========== init ========== 
 start_new_project(16);
 canvas_interval = setInterval(update_canvas, 30);
 

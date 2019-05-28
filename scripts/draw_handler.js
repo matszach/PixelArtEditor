@@ -1,16 +1,3 @@
-// elements
-brush_size_slider = document.getElementById("brush_size_slider");
-red_slider = document.getElementById("red_slider");
-green_slider = document.getElementById("green_slider");
-blue_slider = document.getElementById("blue_slider");
-
-
-// draw vars (TEMP)
-var choosen_color = [255,255,255];
-var brush_size = 1;
-var grid_wanted = true;
-
-
 // draw accoring to choosen options
 function get_user_input(){
 
@@ -61,21 +48,4 @@ function get_user_input(){
     }
     ctx.rect(x,y,len,len);
     ctx.stroke();
-}
-
-
-// drawing settings updating
-function update_brush_size(){
-    brush_size = brush_size_slider.value;
-}
-
-function update_color(){
-    r = red_slider.value;
-    g = green_slider.value;
-    b = blue_slider.value;
-    choosen_color = [r,g,b];
-}
-
-function update_grid_wanted(){
-    grid_wanted = !grid_wanted;
 }

@@ -1,5 +1,8 @@
-// const 
+// ========== constants ========== 
 const max_stack_length = 20;
+
+
+// ========== variables ========== 
 
 // previous state stack
 var state_stack = [];
@@ -9,6 +12,8 @@ var state_stack = [];
 // on mouse up this is set to true
 var save_pending = true;
 
+
+// ========== runtime ========== 
 
 // saves state
 function save_current_canvas_state(){
