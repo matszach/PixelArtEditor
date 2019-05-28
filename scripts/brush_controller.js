@@ -9,7 +9,16 @@ const brush_type_buttons = [
     document.getElementById("brush_radio_5"),
     document.getElementById("brush_radio_6"),
     document.getElementById("brush_radio_7"),
-    document.getElementById("brush_radio_8")
+    document.getElementById("brush_radio_8"),
+    document.getElementById("brush_radio_9"),
+    document.getElementById("brush_radio_10"),
+    document.getElementById("brush_radio_11"),
+    document.getElementById("brush_radio_12"),
+    document.getElementById("brush_radio_13"),
+    document.getElementById("brush_radio_14"),
+    document.getElementById("brush_radio_15"),
+    document.getElementById("brush_radio_16"),
+    document.getElementById("brush_radio_17")
 ];
 
 
@@ -25,6 +34,15 @@ const brush_types_by_element = [
     BrushType.CIRCLE,
     BrushType.LIGHT_SPRAY,
     BrushType.HEAVY_SPRAY,
+    BrushType.SQUARE,
+    BrushType.SQUARE,
+    BrushType.SQUARE,
+    BrushType.SQUARE,
+    BrushType.SQUARE,
+    BrushType.SQUARE,
+    BrushType.SQUARE,
+    BrushType.SQUARE,
+    BrushType.SQUARE,
     BrushType.SQUARE,
     BrushType.SQUARE,
     BrushType.SQUARE,
