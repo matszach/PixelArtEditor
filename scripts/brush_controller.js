@@ -21,25 +21,30 @@ const brush_type_buttons = [
     document.getElementById("brush_radio_17")
 ];
 
-
 // ========== constants ========== 
 const BrushType = {
     SQUARE : 0,
     CIRCLE : 1,
     LIGHT_SPRAY : 2,
-    HEAVY_SPRAY : 3
+    HEAVY_SPRAY : 3,
+    LINE_HELD : 4,
+    SQUARE_HELD : 5,
+    CORNER_ELIPSIS_HELD : 6,
+    CENTER_CIRCLE_HELD : 7,
+    FLOOD : 8,
+    VARIATION : 9
 }
 const brush_types_by_element = [
     BrushType.SQUARE,
     BrushType.CIRCLE,
     BrushType.LIGHT_SPRAY,
     BrushType.HEAVY_SPRAY,
-    BrushType.SQUARE,
-    BrushType.SQUARE,
-    BrushType.SQUARE,
-    BrushType.SQUARE,
-    BrushType.SQUARE,
-    BrushType.SQUARE,
+    BrushType.LINE_HELD,
+    BrushType.SQUARE_HELD,
+    BrushType.CORNER_ELIPSIS_HELD,
+    BrushType.CENTER_CIRCLE_HELD,
+    BrushType.FLOOD,
+    BrushType.VARIATION,
     BrushType.SQUARE,
     BrushType.SQUARE,
     BrushType.SQUARE,
