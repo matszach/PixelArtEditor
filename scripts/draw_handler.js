@@ -282,10 +282,10 @@ function execute_input_for_LINE_HELD(){
                     x_range = x_c - x_o;
                     y_start = y_o;
                     y_range = y_c - y_o;
-                } else {E
-                    x_start = x_c;E
+                } else {
+                    x_start = x_c;
                     x_range = x_o - x_c;
-                    y_start = y_c;E
+                    y_start = y_c;
                     y_range = y_o - y_c;
                 }
 
