@@ -25,9 +25,11 @@ function get_user_input(){
         default : execute_input_for_SQUARE();
     }
 
-    // CORNER_ELIPSIS_HELD : 6,
-    // CENTER_CIRCLE_HELD : 7,
-    // VARIATION : 9
+    // CORNER_ELIPSIS_EMPTY_HELD : 7,
+    // CORNER_ELIPSIS_FILLED_HELD : 8,
+    // CENTER_CIRCLE_HELD : 9,
+    // FLOOD : 10,
+    // VARIATION : 11
 }
 
 // ==================================================== CLICK ACTIONS ====================================================

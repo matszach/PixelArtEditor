@@ -6,7 +6,15 @@ document.body.onmousedown = function() {
   mouseDown = true;
 }
 
+document.body.ontouchstart = function(){
+  mouseDown = true;
+}
+
 document.body.onmouseup = function() {
+  mouseDown = false;
+}
+
+document.body.ontouchend = function(){
   mouseDown = false;
 }
 
@@ -14,14 +22,19 @@ document.body.onmouseup = function() {
 let mouseX, mouseY;
 
 document.body.onmousemove = function(){
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+  mouseX = event.clientX;
+  mouseY = event.clientY;
+}
+
+document.body.ontouchmove = function(){
+  mouseX = event.clientX;
+  mouseY = event.clientY;
 }
 
 // returns mouse position in canvas
 function getMousePositionInCanvas(){
-    cvs_rect = cvs.getBoundingClientRect();
-    return [mouseX - cvs_rect.left, mouseY - cvs_rect.top];
+  cvs_rect = cvs.getBoundingClientRect();
+  return [mouseX - cvs_rect.left, mouseY - cvs_rect.top];
 }
 
 function isMouseInCanvas(){
