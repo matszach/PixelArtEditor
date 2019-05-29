@@ -17,15 +17,14 @@ function get_user_input(){
         case BrushType.LIGHT_SPRAY : execute_input_for_SPRAY(0.05); break;
         case BrushType.HEAVY_SPRAY : execute_input_for_SPRAY(0.12); break;
         case BrushType.LINE_HELD : execute_input_for_LINE_HELD(); break;
-
-
+        case BrushType.RECTANGLE_EMPTY_HELD : execute_input_for_RECTANGLE_EMPTY_HELD(); break;
+        case BrushType.RECTANGLE_FILLED_HELD : execute_input_for_RECTANGLE_FILLED_HELD(); break;
 
         case BrushType.FLOOD : execute_input_for_FLOOD(); break;
 
         default : execute_input_for_SQUARE();
     }
 
-    // SQUARE_HELD : 5,
     // CORNER_ELIPSIS_HELD : 6,
     // CENTER_CIRCLE_HELD : 7,
     // VARIATION : 9
@@ -283,10 +282,10 @@ function execute_input_for_LINE_HELD(){
                     x_range = x_c - x_o;
                     y_start = y_o;
                     y_range = y_c - y_o;
-                } else {
-                    x_start = x_c;
+                } else {E
+                    x_start = x_c;E
                     x_range = x_o - x_c;
-                    y_start = y_c;
+                    y_start = y_c;E
                     y_range = y_o - y_c;
                 }
 
@@ -324,8 +323,129 @@ function execute_input_for_LINE_HELD(){
     manage_held_action();
 }
 
+// ===== HELD RECTANGLE EMPTY =====
+function execute_input_for_RECTANGLE_EMPTY_HELD(){
 
+    // ensures that the functions are set-up only once
+    if(prepared_action_type != brush_type){
 
+        prepared_action_type = BrushType.RECTANGLE_EMPTY_HELD;
+
+        // no action required on initial click
+        held_action_start_function = function (){
+            // nothing
+        }
+    
+        // draw indicator rectangle from initial point to current cursor location
+        held_action_in_progress_function = function(){
+
+            o_loc = held_action_origin_location;
+            o_loc[0] = Math.floor(o_loc[0]/unit_size) * unit_size;
+            o_loc[1] = Math.floor(o_loc[1]/unit_size) * unit_size;
+
+            c_loc = getMousePositionInCanvas();
+            c_loc[0] = Math.round(c_loc[0]/unit_size) * unit_size;
+            c_loc[1] = Math.round(c_loc[1]/unit_size) * unit_size;
+            
+            x_root = Math.min(o_loc[0], c_loc[0]);
+            y_root = Math.min(o_loc[1], c_loc[1]);
+            x_len = Math.abs(o_loc[0]-c_loc[0]) + unit_size;
+            y_len = Math.abs(o_loc[1]-c_loc[1]) + unit_size;
+
+            ctx.beginPath();
+            ctx.lineWidth = highlighted_grid_width; 
+            ctx.strokeStyle = highlighted_grid_color_mouse_down;
+            ctx.rect(x_root,y_root,x_len,y_len);
+            ctx.stroke();
+        }
+    
+        // fill pixels on path
+        held_action_execute_function = function(){
+
+            o_loc = held_action_origin_location;
+            o_loc[0] = Math.floor(o_loc[0]/unit_size);
+            o_loc[1] = Math.floor(o_loc[1]/unit_size);
+
+            c_loc = getMousePositionInCanvas();
+            c_loc[0] = Math.round(c_loc[0]/unit_size);
+            c_loc[1] = Math.round(c_loc[1]/unit_size);
+        
+            for(i = Math.min(o_loc[0], c_loc[0]); i <= Math.max(o_loc[0], c_loc[0]); i++){
+                safe_fill(i,o_loc[1]);
+                safe_fill(i,c_loc[1]);
+            }
+
+            for(j = Math.min(o_loc[1], c_loc[1]); j <= Math.max(o_loc[1], c_loc[1]); j++){
+                safe_fill(o_loc[0],j);
+                safe_fill(c_loc[0],j);
+            }
+
+        }
+    }
+
+    // executes now set-up function in held-action order
+    manage_held_action();
+}
+
+// ===== HELD RECTANGLE FILLED =====
+function execute_input_for_RECTANGLE_FILLED_HELD(){
+
+    // ensures that the functions are set-up only once
+    if(prepared_action_type != brush_type){
+
+        prepared_action_type = BrushType.RECTANGLE_FILLED_HELD;
+
+        // no action required on initial click
+        held_action_start_function = function (){
+            // nothing
+        }
+    
+        // draw indicator rectangle from initial point to current cursor location
+        held_action_in_progress_function = function(){
+
+            o_loc = held_action_origin_location;
+            o_loc[0] = Math.floor(o_loc[0]/unit_size) * unit_size;
+            o_loc[1] = Math.floor(o_loc[1]/unit_size) * unit_size;
+
+            c_loc = getMousePositionInCanvas();
+            c_loc[0] = Math.round(c_loc[0]/unit_size) * unit_size;
+            c_loc[1] = Math.round(c_loc[1]/unit_size) * unit_size;
+            
+            x_root = Math.min(o_loc[0], c_loc[0]);
+            y_root = Math.min(o_loc[1], c_loc[1]);
+            x_len = Math.abs(o_loc[0]-c_loc[0]) + unit_size;
+            y_len = Math.abs(o_loc[1]-c_loc[1]) + unit_size;
+
+            ctx.beginPath();
+            ctx.lineWidth = highlighted_grid_width; 
+            ctx.strokeStyle = highlighted_grid_color_mouse_down;
+            ctx.rect(x_root,y_root,x_len,y_len);
+            ctx.stroke();
+        }
+    
+        // fill pixels on path
+        held_action_execute_function = function(){
+
+            o_loc = held_action_origin_location;
+            o_loc[0] = Math.floor(o_loc[0]/unit_size);
+            o_loc[1] = Math.floor(o_loc[1]/unit_size);
+
+            c_loc = getMousePositionInCanvas();
+            c_loc[0] = Math.round(c_loc[0]/unit_size);
+            c_loc[1] = Math.round(c_loc[1]/unit_size);
+        
+            for(i = Math.min(o_loc[0], c_loc[0]); i <= Math.max(o_loc[0], c_loc[0]); i++){
+                for(j = Math.min(o_loc[1], c_loc[1]); j <= Math.max(o_loc[1], c_loc[1]); j++){
+                    safe_fill(i,j);
+                }
+            }
+
+        }
+    }
+
+    // executes now set-up function in held-action order
+    manage_held_action();
+}
 
 
 

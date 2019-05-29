@@ -28,11 +28,12 @@ const BrushType = {
     LIGHT_SPRAY : 2,
     HEAVY_SPRAY : 3,
     LINE_HELD : 4,
-    SQUARE_HELD : 5,
-    CORNER_ELIPSIS_HELD : 6,
-    CENTER_CIRCLE_HELD : 7,
-    FLOOD : 8,
-    VARIATION : 9
+    RECTANGLE_EMPTY_HELD : 5,
+    RECTANGLE_FILLED_HELD : 6,
+    CORNER_ELIPSIS_HELD : 7,
+    CENTER_CIRCLE_HELD : 8,
+    FLOOD : 9,
+    VARIATION : 10
 }
 const brush_types_by_element = [
     BrushType.SQUARE,
@@ -40,12 +41,12 @@ const brush_types_by_element = [
     BrushType.LIGHT_SPRAY,
     BrushType.HEAVY_SPRAY,
     BrushType.LINE_HELD,
-    BrushType.SQUARE_HELD,
+    BrushType.RECTANGLE_EMPTY_HELD,
+    BrushType.RECTANGLE_FILLED_HELD,
     BrushType.CORNER_ELIPSIS_HELD,
     BrushType.CENTER_CIRCLE_HELD,
     BrushType.FLOOD,
     BrushType.VARIATION,
-    BrushType.SQUARE,
     BrushType.SQUARE,
     BrushType.SQUARE,
     BrushType.SQUARE,
