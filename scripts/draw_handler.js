@@ -19,20 +19,16 @@ function get_user_input(){
         case BrushType.LINE_HELD : execute_input_for_LINE_HELD(); break;
         case BrushType.RECTANGLE_EMPTY_HELD : execute_input_for_RECTANGLE_EMPTY_HELD(); break;
         case BrushType.RECTANGLE_FILLED_HELD : execute_input_for_RECTANGLE_FILLED_HELD(); break;
-
-
-
+        case BrushType.CORNER_ELIPSIS_EMPTY_HELD : execute_input_for_CORNER_ELIPSIS_EMPTY_HELD(); break;
+        case BrushType.CORNER_ELIPSIS_FILLED_HELD : execute_input_for_CORNER_ELIPSIS_FILLED_HELD(); break;
+        // CENTER_CIRCLE_HELD : 9,
         case BrushType.FLOOD : execute_input_for_FLOOD(); break;
         case BrushType.VARIATION : execute_input_for_VARIATION(12); break;
 
         default : execute_input_for_SQUARE();
     }
 
-    // CORNER_ELIPSIS_EMPTY_HELD : 7,
-    // CORNER_ELIPSIS_FILLED_HELD : 8,
-    // CENTER_CIRCLE_HELD : 9,
-    // FLOOD : 10,                      done
-    // VARIATION : 11                   done
+
 }
 
 // ==================================================== CLICK ACTIONS ====================================================
@@ -494,6 +490,177 @@ function execute_input_for_RECTANGLE_FILLED_HELD(){
 
 
 
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
+
+// ===== HELD CORNER ELIPSIS EMPTY =====
+function execute_input_for_CORNER_ELIPSIS_EMPTY_HELD(){
+
+    // ensures that the functions are set-up only once
+    if(prepared_action_type != brush_type){
+
+        prepared_action_type = BrushType.CORNER_ELIPSIS_EMPTY_HELD;
+
+        // no action required on initial click
+        held_action_start_function = function (){
+            // nothing
+        }
+    
+        // draw indicator rectangle from initial point to current cursor location
+        held_action_in_progress_function = function(){
+            draw_held_elipsis();
+        }
+    
+        // fill pixels on path
+        held_action_execute_function = function(){
+
+            o_loc = held_action_origin_location;
+            o_loc[0] = Math.floor(o_loc[0]/unit_size) * unit_size;
+            o_loc[1] = Math.floor(o_loc[1]/unit_size) * unit_size;
+
+            c_loc = getMousePositionInCanvas();
+            c_loc[0] = Math.round(c_loc[0]/unit_size) * unit_size;
+            c_loc[1] = Math.round(c_loc[1]/unit_size) * unit_size;
+            
+            x_root = Math.min(o_loc[0],c_loc[0])/unit_size;
+            y_root = Math.min(o_loc[1],c_loc[1])/unit_size;
+
+            x_len = Math.abs(o_loc[0]-c_loc[0])/unit_size;
+            y_len = Math.abs(o_loc[1]-c_loc[1])/unit_size;
+            y_scale = y_len/x_len;
+
+            // for each unit in brush range
+            for(i = x_root; i < x_root + x_len; i++){
+                for(j = y_root; j < y_root + y_len; j++){
+
+
+                    // (x/rx)^2 + (y/ry)^2 = 1
+
+                    // skip if outside circle
+                    rad_x = x_len/2;
+                    rad_y = y_len/2;
+                    dist_x = Math.abs(i-x_root-rad_x+0.5);
+                    dist_y = Math.abs(j-y_root-rad_y+0.5);
+                    if (Math.pow(dist_x/rad_x,2) + Math.pow(dist_y/rad_y,2) > 1){
+                        continue;
+                    }
+
+                    if (Math.pow(dist_x/(rad_x-1),2) + Math.pow(dist_y/(rad_y-1),2) <= 0.93){ 
+                        // * 0.93 gives more leeway when drawing flatter elipses 
+                        continue;
+                    }
+
+                    // updates canvas data
+                    safe_fill(i,j);
+                }
+            }
+
+        }
+    }
+
+    // executes now set-up function in held-action order
+    manage_held_action();
+}
+
+
+// ===== HELD CORNER ELIPSIS FILLED =====
+function execute_input_for_CORNER_ELIPSIS_FILLED_HELD(){
+
+    // ensures that the functions are set-up only once
+    if(prepared_action_type != brush_type){
+
+        prepared_action_type = BrushType.CORNER_ELIPSIS_FILLED_HELD;
+
+        // no action required on initial click
+        held_action_start_function = function (){
+            // nothing
+        }
+    
+        // draw indicator rectangle from initial point to current cursor location
+        held_action_in_progress_function = function(){
+            draw_held_elipsis();
+        }
+    
+        // fill pixels on path
+        held_action_execute_function = function(){
+
+            o_loc = held_action_origin_location;
+            o_loc[0] = Math.floor(o_loc[0]/unit_size) * unit_size;
+            o_loc[1] = Math.floor(o_loc[1]/unit_size) * unit_size;
+
+            c_loc = getMousePositionInCanvas();
+            c_loc[0] = Math.round(c_loc[0]/unit_size) * unit_size;
+            c_loc[1] = Math.round(c_loc[1]/unit_size) * unit_size;
+            
+            x_root = Math.min(o_loc[0],c_loc[0])/unit_size;
+            y_root = Math.min(o_loc[1],c_loc[1])/unit_size;
+
+            x_len = Math.abs(o_loc[0]-c_loc[0])/unit_size;
+            y_len = Math.abs(o_loc[1]-c_loc[1])/unit_size;
+            y_scale = y_len/x_len;
+
+            // for each unit in brush range
+            for(i = x_root; i < x_root + x_len; i++){
+                for(j = y_root; j < y_root + y_len; j++){
+
+
+                    // (x/rx)^2 + (y/ry)^2 = 1
+
+                    // skip if outside circle
+                    rad_x = x_len/2;
+                    rad_y = y_len/2;
+                    dist_x = Math.abs(i-x_root-rad_x+0.5);
+                    dist_y = Math.abs(j-y_root-rad_y+0.5);
+                    if (Math.pow(dist_x/rad_x,2) + Math.pow(dist_y/rad_y,2) > 1){
+                        continue;
+                    }
+
+                    // updates canvas data
+                    safe_fill(i,j);
+                }
+            }
+
+        }
+    }
+
+    // executes now set-up function in held-action order
+    manage_held_action();
+}
+
+
+function draw_held_elipsis(){
+    o_loc = held_action_origin_location;
+    o_loc[0] = Math.floor(o_loc[0]/unit_size) * unit_size;
+    o_loc[1] = Math.floor(o_loc[1]/unit_size) * unit_size;
+
+    c_loc = getMousePositionInCanvas();
+    c_loc[0] = Math.round(c_loc[0]/unit_size) * unit_size;
+    c_loc[1] = Math.round(c_loc[1]/unit_size) * unit_size;
+    
+    x_root = (o_loc[0]+c_loc[0])/2;
+    y_root = (o_loc[1]+c_loc[1])/2;
+    x_len = Math.abs(o_loc[0]-c_loc[0]);
+    y_len = Math.abs(o_loc[1]-c_loc[1]);
+    y_scale = y_len/x_len;
+
+    ctx.save();
+    ctx.scale(1, y_scale);
+    ctx.lineWidth = (highlighted_grid_width/y_scale+highlighted_grid_width)/2;
+    ctx.strokeStyle = highlighted_grid_color_mouse_down;
+    ctx.beginPath();
+    ctx.arc(x_root,y_root/y_scale, x_len/2, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.restore();
+}
+
+
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
 
 // ========== util ========== 
 function get_brush_area(){
