@@ -20,7 +20,10 @@ function get_user_input(){
         case BrushType.RECTANGLE_EMPTY_HELD : execute_input_for_RECTANGLE_EMPTY_HELD(); break;
         case BrushType.RECTANGLE_FILLED_HELD : execute_input_for_RECTANGLE_FILLED_HELD(); break;
 
+
+
         case BrushType.FLOOD : execute_input_for_FLOOD(); break;
+        case BrushType.VARIATION : execute_input_for_VARIATION(12); break;
 
         default : execute_input_for_SQUARE();
     }
@@ -28,8 +31,8 @@ function get_user_input(){
     // CORNER_ELIPSIS_EMPTY_HELD : 7,
     // CORNER_ELIPSIS_FILLED_HELD : 8,
     // CENTER_CIRCLE_HELD : 9,
-    // FLOOD : 10,
-    // VARIATION : 11
+    // FLOOD : 10,                      done
+    // VARIATION : 11                   done
 }
 
 // ==================================================== CLICK ACTIONS ====================================================
@@ -51,13 +54,8 @@ function execute_input_for_SQUARE(){
         for(i = x_min; i < x_min + range; i++){
             for(j = y_min; j < y_min + range; j++){
 
-                // skip if outside of canvas
-                if (i < 0 || j < 0 || i >= size_in_units || j >= size_in_units){
-                    continue;
-                }
-
-                // updates canvas data
-                canvas_status_table[i][j] = choosen_color;
+               // updates canvas data
+               safe_fill(i,j);
             }
         }
     } 
@@ -202,6 +200,50 @@ function flood_and_spread(i,j,target_color, old_color){
     flood_and_spread(i,j-1,target_color, old_color);
     flood_and_spread(i+1,j,target_color, old_color);
     flood_and_spread(i-1,j,target_color, old_color);
+}
+
+// ========= VARIATION ==========
+function execute_input_for_VARIATION(variation_range){
+
+    // left top corner of brush area as [X,Y]
+    brush_area_loc = get_brush_area();
+
+    // update table in range if mouse down
+    if(mouseDown){
+
+        x_min = Math.round(brush_area_loc[0]/unit_size);
+        y_min = Math.round(brush_area_loc[1]/unit_size);
+        range = parseInt(brush_size);
+
+        // for each unit in brush range
+        for(i = x_min; i < x_min + range; i++){
+            for(j = y_min; j < y_min + range; j++){
+
+                altcolor = [
+                    getRandomRGBLegalInt(parseInt(choosen_color[0])-variation_range, parseInt(choosen_color[0])+variation_range),
+                    getRandomRGBLegalInt(parseInt(choosen_color[1])-variation_range, parseInt(choosen_color[1])+variation_range),
+                    getRandomRGBLegalInt(parseInt(choosen_color[2])-variation_range, parseInt(choosen_color[2])+variation_range)
+                ];
+
+                // updates canvas data
+                safe_fill_alt_color(i,j, altcolor);
+            }
+        }
+    } 
+
+    // highlight side length
+    len = unit_size * brush_size;
+
+    // highlighting rectangle
+    ctx.beginPath();
+    ctx.lineWidth = highlighted_grid_width;
+    if(mouseDown){
+        ctx.strokeStyle = highlighted_grid_color_mouse_down;
+    } else {
+        ctx.strokeStyle = highlighted_grid_color_mouse_up;
+    }
+    ctx.rect(brush_area_loc[0],brush_area_loc[1],len,len);
+    ctx.stroke();
 }
 
 // ==================================================== HELD ACTIONS ====================================================
@@ -469,6 +511,12 @@ function get_brush_area(){
 function safe_fill(i,j){
     if(field_exists(i,j)){
         canvas_status_table[i][j] = choosen_color;
+    }
+}
+
+function safe_fill_alt_color(i,j,color){
+    if(field_exists(i,j)){
+        canvas_status_table[i][j] = color;
     }
 }
 
