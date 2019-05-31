@@ -23,6 +23,7 @@ function get_user_input(){
         case BrushType.CENTER_CIRCLE_HELD : execute_input_for_CENTER_CIRCLE_HELD(); break;
         case BrushType.FLOOD : execute_input_for_FLOOD(); break;
         case BrushType.VARIATION : execute_input_for_VARIATION(12); break;
+        case BrushType.SAMPLER : execute_input_for_SAMPLER(); break;
 
         default : execute_input_for_SQUARE();
     }
@@ -230,6 +231,32 @@ function flood_and_spread(i,j,target_color, old_color){
     flood_and_spread(i-1,j,target_color, old_color);
 }
 
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
+
+// ========= SAMPLER =========
+function execute_input_for_SAMPLER(){
+    // sample color at cursor location
+    if(mouseDown){
+
+        // if(!isMouseInCanvas()){
+        //     break;
+        // }
+
+        sample_origin = getMousePositionInCanvas();
+
+        x_loc= Math.floor(sample_origin[0]/unit_size);
+        y_loc = Math.floor(sample_origin[1]/unit_size);
+
+        choosen_color = canvas_status_table[x_loc][y_loc];
+        red_slider.value = choosen_color[0];
+        green_slider.value = choosen_color[1];
+        blue_slider.value = choosen_color[2];
+    }
+}
 
 
 

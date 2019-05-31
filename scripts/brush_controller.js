@@ -34,7 +34,8 @@ const BrushType = {
     CORNER_ELIPSIS_FILLED_HELD : 8,
     CENTER_CIRCLE_HELD : 9,
     FLOOD : 10,
-    VARIATION : 11
+    VARIATION : 11,
+    SAMPLER : 12
 }
 const brush_types_by_element = [
     BrushType.SQUARE,
@@ -49,7 +50,7 @@ const brush_types_by_element = [
     BrushType.CENTER_CIRCLE_HELD,
     BrushType.FLOOD,
     BrushType.VARIATION,
-    BrushType.SQUARE,
+    BrushType.SAMPLER,
     BrushType.SQUARE,
     BrushType.SQUARE,
     BrushType.SQUARE,
