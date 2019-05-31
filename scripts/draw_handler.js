@@ -1,7 +1,6 @@
 
 // ========== runtime ========== 
 
-
 // draw accoring to choosen options
 function get_user_input(){
    
@@ -21,7 +20,7 @@ function get_user_input(){
         case BrushType.RECTANGLE_FILLED_HELD : execute_input_for_RECTANGLE_FILLED_HELD(); break;
         case BrushType.CORNER_ELIPSIS_EMPTY_HELD : execute_input_for_CORNER_ELIPSIS_EMPTY_HELD(); break;
         case BrushType.CORNER_ELIPSIS_FILLED_HELD : execute_input_for_CORNER_ELIPSIS_FILLED_HELD(); break;
-        // CENTER_CIRCLE_HELD : 9,
+        case BrushType.CENTER_CIRCLE_HELD : execute_input_for_CENTER_CIRCLE_HELD(); break;
         case BrushType.FLOOD : execute_input_for_FLOOD(); break;
         case BrushType.VARIATION : execute_input_for_VARIATION(12); break;
 
@@ -31,7 +30,19 @@ function get_user_input(){
 
 }
 
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
+
 // ==================================================== CLICK ACTIONS ====================================================
+
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
 
 // ========= SQUARE =========
 function execute_input_for_SQUARE(){
@@ -70,6 +81,13 @@ function execute_input_for_SQUARE(){
     ctx.rect(brush_area_loc[0],brush_area_loc[1],len,len);
     ctx.stroke();
 }
+
+
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
 
 // ========= CIRCLE =========
 function execute_input_for_CIRCLE(){
@@ -117,6 +135,13 @@ function execute_input_for_CIRCLE(){
     ctx.arc(brush_area_loc[0]+rad,brush_area_loc[1]+rad, rad, 0, 2 * Math.PI);
     ctx.stroke();
 }
+
+
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
 
 // ========= SPRAY =========
 function execute_input_for_SPRAY(density){
@@ -167,6 +192,13 @@ function execute_input_for_SPRAY(density){
 
 }
 
+
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
+
 // ========= FLOOD =========
 function execute_input_for_FLOOD(){
     // update table in range if mouse down
@@ -197,6 +229,13 @@ function flood_and_spread(i,j,target_color, old_color){
     flood_and_spread(i+1,j,target_color, old_color);
     flood_and_spread(i-1,j,target_color, old_color);
 }
+
+
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
 
 // ========= VARIATION ==========
 function execute_input_for_VARIATION(variation_range){
@@ -242,6 +281,13 @@ function execute_input_for_VARIATION(variation_range){
     ctx.stroke();
 }
 
+
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
+
 // ==================================================== HELD ACTIONS ====================================================
 
 //  variables 
@@ -249,7 +295,6 @@ var held_action_in_progress = false;
 let held_action_origin_location;
 
 let prepared_action_type;
-let held_action_start_function;
 let held_action_in_progress_function;
 let held_action_execute_function;
 
@@ -260,7 +305,6 @@ function manage_held_action(){
         if(!held_action_in_progress){
             if(isMouseInCanvas()){
                 // held action started within the boundaries of the canvas
-                held_action_start_function();
                 held_action_in_progress = true;
                 held_action_origin_location = getMousePositionInCanvas();
             }
@@ -278,6 +322,13 @@ function manage_held_action(){
     }
 }
 
+
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
+
 // ===== HELD LINE =====
 function execute_input_for_LINE_HELD(){
 
@@ -286,11 +337,6 @@ function execute_input_for_LINE_HELD(){
 
         prepared_action_type = BrushType.LINE_HELD;
 
-        // no action required on initial click
-        held_action_start_function = function (){
-            // nothing
-        }
-    
         // draw indicator line from initial point to current cursor location
         held_action_in_progress_function = function(){
             held_action_current_location = getMousePositionInCanvas();
@@ -363,6 +409,13 @@ function execute_input_for_LINE_HELD(){
     manage_held_action();
 }
 
+
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
+
 // ===== HELD RECTANGLE EMPTY =====
 function execute_input_for_RECTANGLE_EMPTY_HELD(){
 
@@ -370,11 +423,6 @@ function execute_input_for_RECTANGLE_EMPTY_HELD(){
     if(prepared_action_type != brush_type){
 
         prepared_action_type = BrushType.RECTANGLE_EMPTY_HELD;
-
-        // no action required on initial click
-        held_action_start_function = function (){
-            // nothing
-        }
     
         // draw indicator rectangle from initial point to current cursor location
         held_action_in_progress_function = function(){
@@ -434,11 +482,6 @@ function execute_input_for_RECTANGLE_FILLED_HELD(){
     if(prepared_action_type != brush_type){
 
         prepared_action_type = BrushType.RECTANGLE_FILLED_HELD;
-
-        // no action required on initial click
-        held_action_start_function = function (){
-            // nothing
-        }
     
         // draw indicator rectangle from initial point to current cursor location
         held_action_in_progress_function = function(){
@@ -501,13 +544,8 @@ function execute_input_for_CORNER_ELIPSIS_EMPTY_HELD(){
     if(prepared_action_type != brush_type){
 
         prepared_action_type = BrushType.CORNER_ELIPSIS_EMPTY_HELD;
-
-        // no action required on initial click
-        held_action_start_function = function (){
-            // nothing
-        }
     
-        // draw indicator rectangle from initial point to current cursor location
+        // draw indicator elipsis from initial point to current cursor location
         held_action_in_progress_function = function(){
             draw_held_elipsis();
         }
@@ -542,6 +580,7 @@ function execute_input_for_CORNER_ELIPSIS_EMPTY_HELD(){
                     rad_y = y_len/2;
                     dist_x = Math.abs(i-x_root-rad_x+0.5);
                     dist_y = Math.abs(j-y_root-rad_y+0.5);
+
                     if (Math.pow(dist_x/rad_x,2) + Math.pow(dist_y/rad_y,2) > 1){
                         continue;
                     }
@@ -572,12 +611,7 @@ function execute_input_for_CORNER_ELIPSIS_FILLED_HELD(){
 
         prepared_action_type = BrushType.CORNER_ELIPSIS_FILLED_HELD;
 
-        // no action required on initial click
-        held_action_start_function = function (){
-            // nothing
-        }
-    
-        // draw indicator rectangle from initial point to current cursor location
+        // draw indicator elipsis from initial point to current cursor location
         held_action_in_progress_function = function(){
             draw_held_elipsis();
         }
@@ -612,6 +646,7 @@ function execute_input_for_CORNER_ELIPSIS_FILLED_HELD(){
                     rad_y = y_len/2;
                     dist_x = Math.abs(i-x_root-rad_x+0.5);
                     dist_y = Math.abs(j-y_root-rad_y+0.5);
+
                     if (Math.pow(dist_x/rad_x,2) + Math.pow(dist_y/rad_y,2) > 1){
                         continue;
                     }
@@ -656,6 +691,83 @@ function draw_held_elipsis(){
 }
 
 
+
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
+
+
+// ===== HELD CENTER CIRCLE =====
+function execute_input_for_CENTER_CIRCLE_HELD(){
+
+    // ensures that the functions are set-up only once
+    if(prepared_action_type != brush_type){
+
+        prepared_action_type = BrushType.CENTER_CIRCLE_HELD;
+
+        // draw indicator crcle and radius from initial point to current cursor location
+        held_action_in_progress_function = function(){
+
+            o_loc = held_action_origin_location;
+            o_loc[0] = Math.round(o_loc[0]/unit_size) * unit_size;
+            o_loc[1] = Math.round(o_loc[1]/unit_size) * unit_size;
+
+            c_loc = getMousePositionInCanvas();
+            radius = Math.sqrt(Math.pow(o_loc[0]-c_loc[0], 2) + Math.pow(o_loc[1]-c_loc[1], 2));
+
+            // radius
+            ctx.beginPath();
+            ctx.lineWidth = highlighted_grid_width;
+            ctx.strokeStyle = highlighted_grid_color_mouse_down;
+            ctx.moveTo(o_loc[0], o_loc[1]);
+            ctx.lineTo(c_loc[0], c_loc[1]);
+            ctx.stroke();
+
+            // circle
+            ctx.beginPath();
+            ctx.arc(o_loc[0], o_loc[1], radius, 0, 2 * Math.PI);
+            ctx.stroke();
+
+        }
+
+        // fill pixels on path
+        held_action_execute_function = function(){
+
+            o_loc = held_action_origin_location;
+            o_loc[0] = Math.round(o_loc[0]/unit_size) * unit_size;
+            o_loc[1] = Math.round(o_loc[1]/unit_size) * unit_size;
+
+            c_loc = getMousePositionInCanvas();
+            radius = Math.sqrt(Math.pow(o_loc[0]-c_loc[0], 2) + Math.pow(o_loc[1]-c_loc[1], 2));
+
+            min_x = Math.floor((o_loc[0]-radius)/unit_size);
+            max_x = Math.ceil((o_loc[0]+radius)/unit_size);
+            min_y = Math.floor((o_loc[1]-radius)/unit_size);
+            max_y = Math.ceil((o_loc[1]+radius)/unit_size);
+
+            for(i = min_x; i < max_x; i++){
+                for(j = min_y; j < max_y; j++){
+
+                    // skip if outside circle
+                    dist_from_center_X = Math.abs((i+0.5)*unit_size-o_loc[0]);
+                    dist_from_center_Y = Math.abs((j+0.5)*unit_size-o_loc[1]);
+                    distance_from_center = Math.sqrt(Math.pow(dist_from_center_X,2) + Math.pow(dist_from_center_Y,2));
+                    if (distance_from_center > radius){
+                        continue;
+                    }
+
+
+                    safe_fill(i,j);
+                } 
+            }
+
+        }
+    }
+
+    // executes now set-up function in held-action order
+    manage_held_action();
+}
 
 
 // =================================================================================================================================
